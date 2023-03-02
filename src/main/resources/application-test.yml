@@ -1,0 +1,23 @@
+server:
+  display:
+  port: 8080
+  servlet:
+    context-path: /meta
+
+spring:
+  datasource:
+    hikari:
+      meta:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        initialSize: 3
+        maxActive: 50
+        minIdle: 10
+        maxWait: 50000
+        jdbc-url: jdbc:mysql://xx.xx.xx.xxx:8066/xx?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useTimezone=true&serverTimezone=GMT%2B8
+        username: xx
+        password: xx
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8

@@ -1,11 +1,6 @@
 package cn.abel.meta.vo;
 
-/**
- * @ClassName:KeyValuePair
- * @Description: 定义系统信息对对象
- * @author:hzyuan@iflytek.com
- * @date:2017年6月1日
- */
+
 public class KeyValuePair {
     private int key;
     private String value;

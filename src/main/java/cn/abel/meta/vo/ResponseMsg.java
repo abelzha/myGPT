@@ -20,17 +20,6 @@ public class ResponseMsg {
         this.desc = ReturnCode.SUCCESS.getValue();
     }
 
-//    public ResponseMsg(String desc) {
-//        this.flag = true;
-//        this.code = ReturnCode.SUCCESS.getKey();
-//        this.desc = desc;
-//    }
-//
-//    public ResponseMsg(Object data) {
-//        this.flag = true;
-//        this.code = ReturnCode.SUCCESS.getKey();
-//        this.data = data;
-//    }
 
     public static ResponseMsg errResponse(String desc) {
         ResponseMsg responseMsg = new ResponseMsg();

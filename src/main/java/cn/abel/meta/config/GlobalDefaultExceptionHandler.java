@@ -21,8 +21,7 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseMsg defaultErrorHandler(Exception e) {
         log.error(e.getMessage(), e);
-        return new ResponseMsg();
-//        return ResponseMsg.errResponse("服务错误:" + e.getMessage());
+        return ResponseMsg.errResponse("服务太火爆啦");
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)

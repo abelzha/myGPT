@@ -7,7 +7,9 @@ import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.StrUtil;
 import com.unfbx.chatgpt.entity.images.Image;
 import com.unfbx.chatgpt.entity.images.ImageResponse;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
@@ -22,7 +24,8 @@ import java.util.List;
 public class PicController {
 
 
-    public static final List<String> ZOO = ListUtil.of("鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪");
+    public static final List<String> ZOO = ListUtil.of("鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪");
+
     /**
      * 头像生成器
      *
@@ -37,10 +40,10 @@ public class PicController {
         if (prompt.trim().length() > 1) {
             return ResponseMsg.errResponse("图片描述太多");
         }
-        if(!ZOO.contains(prompt)){
+        if (!ZOO.contains(prompt)) {
             return ResponseMsg.errResponse("请输入你的生肖");
         }
-        Image image = Image.builder().prompt("卡通简笔画-"+ prompt.trim()).build();
+        Image image = Image.builder().prompt("卡通简笔画-" + prompt.trim()).build();
         ImageResponse imageResponse = ClientUtils.openAiClient.genImages(image);
 
         // 图片的 URL

@@ -1,27 +1,22 @@
 package cn.abel.meta.controller;
 
 import com.unfbx.chatgpt.OpenAiClient;
-import com.unfbx.chatgpt.OpenAiStreamClient;
 import com.unfbx.chatgpt.entity.chat.ChatCompletion;
 import com.unfbx.chatgpt.entity.chat.ChatCompletionResponse;
 import com.unfbx.chatgpt.entity.chat.Message;
-import com.unfbx.chatgpt.entity.completions.Completion;
-import com.unfbx.chatgpt.entity.completions.CompletionResponse;
 import com.unfbx.chatgpt.interceptor.OpenAILogger;
-import com.unfbx.chatgpt.sse.ConsoleEventSourceListener;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.util.Arrays;
-import java.util.concurrent.CountDownLatch;
+import java.util.Collections;
 
 public class Demo {
 
 
-    private OpenAiClient v2;
+    private final OpenAiClient v2;
 
-     {
+    {
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 7890));
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new OpenAILogger());
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -39,8 +34,8 @@ public class Demo {
                 .connectTimeout(50)
                 .writeTimeout(50)
                 .readTimeout(50)
-                .interceptor(Arrays.asList(httpLoggingInterceptor))
-                .proxy(proxy)
+                .interceptor(Collections.singletonList(httpLoggingInterceptor))
+//                .proxy(proxy)
                 .build();
     }
 
@@ -48,7 +43,7 @@ public class Demo {
     public void chat() {
         //聊天模型：gpt-3.5
         Message message = Message.builder().role(Message.Role.USER).content("你好啊我的伙伴！").build();
-        ChatCompletion chatCompletion = ChatCompletion.builder().messages(Arrays.asList(message)).build();
+        ChatCompletion chatCompletion = ChatCompletion.builder().messages(Collections.singletonList(message)).build();
         ChatCompletionResponse chatCompletionResponse = v2.chatCompletion(chatCompletion);
         chatCompletionResponse.getChoices().forEach(e -> {
             System.out.println(e.getMessage());
@@ -70,8 +65,6 @@ public class Demo {
 //        Arrays.stream(completions.getChoices()).forEach(System.out::println);
 //
 //        System.out.println(openAiClient.models());
-
-
 
 
 //        OpenAiStreamClient client = new OpenAiStreamClient("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", 60, 60, 60);

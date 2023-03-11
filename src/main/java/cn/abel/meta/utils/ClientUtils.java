@@ -8,12 +8,13 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class ClientUtils {
     public static OpenAiClient openAiClient;
 
     public static OpenAiStreamClient aiStreamClient;
-    private static final String KEY = "";
+    private static final String KEY = "sk-********";
 
     static {
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 7890));
@@ -26,7 +27,7 @@ public class ClientUtils {
                 .writeTimeout(50)
                 .readTimeout(50)
                 .interceptor(Arrays.asList(httpLoggingInterceptor))
-                .proxy(proxy)
+//                .proxy(proxy)
                 .build();
 
     }
@@ -43,7 +44,7 @@ public class ClientUtils {
                 .readTimeout(50)
                 .writeTimeout(50)
                 .apiKey(KEY)
-                .proxy(proxy)
+//                .proxy(proxy)
                 .build();
     }
 }
